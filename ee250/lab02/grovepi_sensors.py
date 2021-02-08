@@ -3,7 +3,7 @@
 List team members here.
 
 Insert Github repository link here.
-"""
+"""# https://github.com/usc-ee250-spring2021/lab02-AaronB19
 
 """python3 interpreters in Ubuntu (and other linux distros) will look in a 
 default set of directories for modules when a program tries to `import` one. 
@@ -16,6 +16,8 @@ performance. Because of this, you will not find this in the default directories.
 """
 import sys
 import time
+import sys
+import time
 # By appending the folder of all the GrovePi libraries to the system path here,
 # we are successfully `import grovepi`
 sys.path.append('../../Software/Python/')
@@ -23,16 +25,25 @@ sys.path.append('../../Software/Python/')
 sys.path.append('../../Software/Python/grove_rgb_lcd')
 
 import grovepi
+from grovepi import *
+from grove_rgb_lcd import *
+from time import sleep
+
 
 """This if-statement checks if you are running this python file directly. That 
 is, if you run `python3 grovepi_sensors.py` in terminal, this if-statement will 
 be true"""
 if __name__ == '__main__':
-    PORT = 4    # D4
+        ultrasonic_ranger = 4
+        pot = 0
 
-    while True:
-        #So we do not poll the sensors too quickly which may introduce noise,
-        #sleep for a reasonable time of 200ms between each iteration.
-        time.sleep(0.2)
+        while True:
+                setRGB(0,255,0) # set green as backlight color
+                d = ultrasonicRead(ultrasonic_ranger)
+                thresh = grovepi.analogRead(pot)
+                if (d<thresh):
+                        setText_norefresh(" %dcm  obj pres %dcm" %(thresh,d))
+                else:
+                        setText_norefresh(" %dcm           %dcm" %(thresh,d))
+                sleep(0.2)
 
-        print(grovepi.ultrasonicRead(PORT))

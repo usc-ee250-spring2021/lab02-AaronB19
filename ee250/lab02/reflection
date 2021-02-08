@@ -1,0 +1,7 @@
+1.  ...
+git add  my_second_file.py
+git commit -m
+git push
+git push --set-upstream orgin my_second_file.py
+2. I was having difficutlies sshing into my RP for some reason. I got it to work a couple $
+3. ???      
